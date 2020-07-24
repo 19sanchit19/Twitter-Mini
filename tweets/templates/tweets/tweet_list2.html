@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for obj in object_list %}
+<div class="row">
+	<div class="col-sm-3" style="background-color:#1DA1F2">
+		<h1>{{ obj.user }}</h1>
+	</div>
+	<div class="col-sm-9">
+		{{ obj.content }}<br>
+		via {{ obj.user }} | {{ obj.timestamp|timesince }} ago</p> <a href="{{ obj.get_absolute_url }}">View</a>
+	</div>
+	<div class="col-sm-12">
+		<hr>
+	</div>
+</div>
+	{% empty %}
+            {% if request.GET.q %}
+             <p>No tweets found.</p>
+            {% else %}
+            <p>No tweets yet.</p>
+            {% endif %}
+{% endfor %}
+{% endblock content %}

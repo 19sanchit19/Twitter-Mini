@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	{% for obj in object_list %}
+			<div class="media">
+		  <div class="media-left">
+		    <a href="#">
+		      <img class="media-object" src="..." alt="...">
+		    </a>
+		  </div>
+		  <div class="media-body">
+		   {{ obj.content }}<br>
+			via {{ obj.user }} | {{ obj.timestamp|timesince }} ago</p> <br>
+		   
+		  </div>
+		</div>
+		
+
+	{% endfor %}
+
+{% endblock content %}
+

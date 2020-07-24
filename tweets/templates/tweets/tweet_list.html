@@ -1,0 +1,78 @@
+
+
+												<!-- NOTE:- preffered template is in tweet_list2 -->
+{% extends "base.html" %}
+{% load recommended %}
+
+
+{% block script %}
+<script>
+$(document).ready(function(){
+  loadTweetContainer("tweet-container")
+});
+</script>
+{% endblock script %}
+
+{% block content %}
+  
+    <div class='row'>
+        <div class='col-sm-3 col-xs-12' style='background-color:#F5F5F5'>
+        <h1>{{ request.user }}</h1>
+        <hr><br>
+        <div style='background-color:#F5F5F5'>
+        <p class='lead'>Recommended Users: </p>
+        {% recommended request.user %}
+        </div>
+        </div>
+        <div class='col-sm-9'>
+          {% if not request.GET %}
+              <div class>
+
+                {% include "tweets/form.html" with form=create_form action_url=create_url btn_title="Tweet" form_class="tweet-form" %}
+
+              </div>
+              <hr>
+          {% endif %}
+
+        <div id="tweet-container" data-url='/api/tweets/'>
+    
+        </div>
+            <a href="#" id="loadmore">Load More Tweets</a>
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- var hashtagRegex=/(^|\s)#([\w\d-]+)/g
+    var usernameRegex=/(^|\s)@([\w\d-]+)/g
+    var currenthtml=$(this).html()
+    var newText;
+    newText=currenthtml.replace(hashtagRegex, "$1<a href='/tags/$2/'>#$2</a>")
+    newText=newText.replace(usernameRegex, "$1<a href='/$2/'>@$2</a>")
+    $(this).html(newText)
+ -->
+
+                                                                     <!-- Got Rid of this -->
+    <!-- {% for obj in object_list %}
+            <div class="media">
+                  <div class="media-left">
+                    <a href="#">
+                      {% if obj.image %}
+                        <img class="media-object" src="..." alt="...">
+                     {% endif %}
+                    </a>
+                  </div>
+                  <div class="media-body">
+                    {{ obj.content }}<br/>
+                    via {{ obj.user }} | {{ obj.timestamp|timesince }} ago | <a href='{{ obj.get_absolute_url }}'>View</a>
+                  </div>
+            </div>
+            <hr/>
+        {% empty %}
+            {% if request.GET.q %}
+             <p>No tweets found.</p>
+            {% else %}
+            <p>No tweets yet.</p>
+            {% endif %}
+        {% endfor %} -->
+
